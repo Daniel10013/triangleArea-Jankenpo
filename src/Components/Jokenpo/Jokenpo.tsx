@@ -23,8 +23,13 @@ function Jokenpo(){
     const [result, setResult] = useState<string>("")
 
     //Escolhas do computador
-    const escolhas: any = {
-        0: "🪨",
+    interface escolhasInterface {
+        0: string,
+        1: string,
+        2: string
+    }
+    const escolhas: escolhasInterface = {
+        0: "🗿",
         1: "📜",
         2: "✂️"
     }
@@ -35,37 +40,42 @@ function Jokenpo(){
         setBt2Disabled(true);
         setBt3Disabled(true);
 
-        let computerChoice = escolhas[Math.floor(Math.random() * 3)];
+        let computerChoice = escolhas[(Math.floor(Math.random() * 3)) as keyof typeof escolhas];
         if(computerChoice == lastSelect){
-            computerChoice = escolhas[Math.floor(Math.random() * 3)]
+            computerChoice = escolhas[(Math.floor(Math.random() * 3)) as keyof typeof escolhas]
         }
     
         lastSelect = computerChoice
         // console.log(computerChoice)
 
-        setUserSelected(escolhas[num])
+        setUserSelected(escolhas[(num) as keyof typeof escolhas])
         setComputerSelected(computerChoice)
         
-        const result: any = {
-            "🪨": () => {
-                computerChoice == "🪨" ? setResult("Empate!") : ""
+        interface resultInterface {
+            "🗿": () => void,
+            "📜": () => void,
+            "✂️": () => void
+        }
+        const result: resultInterface = {
+            "🗿": () => {
+                computerChoice == "🗿" ? setResult("Empate!") : ""
                 computerChoice == "📜" ? (setResult("Você perdeu!"), setComputerScore(computerScore + 1)) : ""
                 computerChoice == "✂️" ? (setResult("Você venceu!"), setUserScore(userScore + 1)) : ""
             },
             "📜": () =>{
                 computerChoice == "📜" ? setResult("Empate!") : ""
                 computerChoice == "✂️" ? (setResult("Você perdeu!"), setComputerScore(computerScore + 1)) : ""
-                computerChoice == "🪨" ? (setResult("Você venceu!"), setUserScore(userScore + 1)) : ""
+                computerChoice == "🗿" ? (setResult("Você venceu!"), setUserScore(userScore + 1)) : ""
             },
             "✂️": () =>{
                 computerChoice == "✂️" ? setResult("Empate!") : ""
-                computerChoice == "🪨" ? (setResult("Você perdeu!"), setComputerScore(computerScore + 1)): ""
+                computerChoice == "🗿" ? (setResult("Você perdeu!"), setComputerScore(computerScore + 1)): ""
                 computerChoice == "📜" ? (setResult("Você venceu!"), setUserScore(userScore + 1)) : ""
             }
         }
         
-        let user = escolhas[num]
-        result[user]()
+        let user = escolhas[(num) as keyof typeof escolhas]
+        result[(user) as keyof typeof result]()
     
         setTimeout(() => {
             setBt1Disabled(false);
@@ -92,7 +102,7 @@ function Jokenpo(){
             </div>        
         </div>
         <div className='selectItem'>
-            <button disabled={btn1Disabled} onClick={()=>{startGame(0)}} >🪨</button> 
+            <button disabled={btn1Disabled} onClick={()=>{startGame(0)}} >🗿</button> 
             <button disabled={btn2Disabled} onClick={()=>{startGame(1)}} >📜</button>
             <button disabled={btn3Disabled} onClick={()=>{startGame(2)}} >✂️</button>
         </div>

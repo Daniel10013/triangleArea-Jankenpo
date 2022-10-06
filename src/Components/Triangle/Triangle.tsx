@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import './Triangle.css'
+import macaco from '../../assets/macaco.gif'
 
 function triangle(){
     const [inputClass, setInputClass] = useState<string>("correct")
@@ -49,6 +50,7 @@ function triangle(){
 
           <button className="btnCalcular" onClick={getAreaTriangulo} >Calcular área do triângulo</button>
           <h3>{area}</h3>
+          <img src={macaco} alt=""/>
     </div>
     )
 }

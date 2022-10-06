@@ -52,3 +52,13 @@ input{
     box-shadow: 0px 0px 7px 2px #2dd177e5;
     transition: 0.3s;
 }
+
+img{
+    border-radius: 20px 5px 20px 5px;
+    height: 200px;
+    width: 89%;
+    box-shadow: 0px 0px 7px 2px #8a59dae5;
+    animation-name: boxShadowRgb;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
